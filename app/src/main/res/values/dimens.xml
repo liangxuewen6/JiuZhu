@@ -1,0 +1,18 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--APP主题字体大小-->
+    <dimen name="themeTextSize">15sp</dimen>
+    <dimen name="titlebar_text_size">30sp</dimen>
+    <dimen name="menu_text_size">14sp</dimen>
+    <dimen name="menu_user_name_size">18sp</dimen>
+    <dimen name="menu_user_summary_size">14sp</dimen>
+
+    <dimen name="titlebar_height">48dp</dimen>
+    <dimen name="navigationbar_height">56dp</dimen>
+    <dimen name="titlebar_margin_top">24dp</dimen>
+    <dimen name="imageview_padding">14dp</dimen>
+
+
+</resources>

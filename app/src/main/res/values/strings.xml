@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">救助</string>
+
+    <string name="title_home_page">首页</string>
+    <string name="menu_home_page">@string/title_home_page</string>
+
+    <string name="title_unprocessed_order_page">未处理</string>
+    <string name="menu_unprocessed_order_page">@string/title_unprocessed_order_page</string>
+
+    <string name="title_processed_order_page">已处理</string>
+    <string name="menu_processed_order_page">@string/title_processed_order_page</string>
+
+    <string name="title_backlog_order_page">今日待处理</string>
+    <string name="menu_backlog_order_page">@string/title_backlog_order_page</string>
+
+    <string name="tile_statistics_page">统计</string>
+    <string name="menu_statistics_page">@string/tile_statistics_page</string>
+
+    <string name="settings">设置</string>
+    <string name="title_activity_login">登录</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">登录或注册</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="welcome">"欢迎 !"</string>
+    <string name="invalid_username">无效的用户名</string>
+    <string name="invalid_password">密码必须大于5个字符</string>
+    <string name="login_failed">"登录失败"</string>
+
+
+</resources>

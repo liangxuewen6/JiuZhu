@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="246dp">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@mipmap/titlebar_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="87dp"
+        android:background="@null"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="81dp"
+            android:layout_height="81dp"
+            android:gravity="center">
+
+            <com.dckj.jiuzhu.view.customview.RoundImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="#ffffff"
+                android:visibility="gone" />
+
+            <com.dckj.jiuzhu.view.customview.RoundImageView
+                android:id="@+id/tv_userhead"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:src="@mipmap/slide_head" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="用户名"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/menu_user_name_size" />
+
+        <TextView
+            android:id="@+id/tv_usersummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="调查员"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/menu_user_summary_size" />
+    </LinearLayout>
+</RelativeLayout>

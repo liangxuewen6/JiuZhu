@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <include layout="@layout/menu_userinfo_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/slide_menu_home"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/menu_home_page"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slide_menu_unprocessed_order"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_order" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/menu_unprocessed_order_page"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slide_menu_processed_order"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_order" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/menu_processed_order_page"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slide_menu_backlog_order"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_order" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/menu_backlog_order_page"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+        android:id="@+id/slide_menu_statistics"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="50dp"
+            android:src="@mipmap/slide_statistics" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/menu_statistics_page"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/menu_text_size" />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/slide_menu_settings"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_statistics" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/settings"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@id/menunavigationbarview"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/slide_menu_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_refresh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="检查更新"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slide_menu_logout"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/slide_logout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="切换用户/注销"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/menu_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/menunavigationbarview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigationbar_height"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
