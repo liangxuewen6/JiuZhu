@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@mipmap/ic_launcher"
+        android:id="@+id/tv_test_menu"
+        android:title="测试按钮" />
+
+</menu>

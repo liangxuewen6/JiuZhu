@@ -52,4 +52,6 @@
     <!--渐变-->
     <color name="shadow_end_color">#03000000</color>
     <color name="shadow_start_color">#37000000</color>
+    
+    <color name="transparent_color">#00000000</color>
 </resources>

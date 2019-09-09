@@ -10,14 +10,13 @@
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.4dp"
         android:background="#99cccccc"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <android.support.v4.app.FragmentTabHost
         android:id="@+id/tabHost"
@@ -31,5 +30,6 @@
         android:id="@+id/navigationbarview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/navigationbar_height"
+        android:visibility="visible"
         />
 </LinearLayout>

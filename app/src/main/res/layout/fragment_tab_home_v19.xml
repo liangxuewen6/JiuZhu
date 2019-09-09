@@ -3,12 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/titlebar_layout"/>
+
+    <include layout="@layout/titlebar_layout" />
 
     <TextView
+        android:id="@+id/home_unprocessedordercount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home Page"
-        android:gravity="center"
-        android:textSize="50sp"/>
+        android:gravity="start"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/home_processedordercount_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/home_backlogordercount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textSize="28sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="296dp"
+        android:layout_gravity="center"
+        android:src="@drawable/home_tongji" />
+
 </LinearLayout>
