@@ -42,6 +42,7 @@ public class ApplyListAdapter extends ListBaseAdapter<Member> {
             useriamge.setImageResource(R.mipmap.user_male);
         } else {
             useriamge.setImageResource(R.mipmap.user_female);
+            contentView.setBackgroundColor(R.color.orange);
         }
 
         memberName.setText(cm.getName());
@@ -57,7 +58,8 @@ public class ApplyListAdapter extends ListBaseAdapter<Member> {
                 Bundle bundle = new Bundle();
                 bundle.putString("user_UUID", cm.getId());
                 bundle.putString("user_name", cm.getName());
-                bundle.putString("user_id", cm.getIdnumber());
+                bundle.putString("user_idcard", cm.getIdnumber());
+                bundle.putBoolean("isUpload",cm.getsex().equals("男")? true : false);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

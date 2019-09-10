@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.SurveyActivity">
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <include layout="@layout/titlebar_layout" />
 
         <Button
             android:id="@+id/assigned_button"
@@ -23,7 +27,7 @@
             android:text="指派订单"
             android:textColor="@color/gray_content" />
 
-        <include layout="@layout/layout_applicant_info"/>
+        <include layout="@layout/layout_apply_info"/>
 
         <LinearLayout
             android:id="@+id/relation_member_layout"
@@ -60,4 +64,5 @@
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

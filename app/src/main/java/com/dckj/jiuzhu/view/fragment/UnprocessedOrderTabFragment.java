@@ -1,15 +1,10 @@
 package com.dckj.jiuzhu.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +13,6 @@ import com.dckj.jiuzhu.MainActivity;
 import com.dckj.jiuzhu.R;
 import com.dckj.jiuzhu.adapter.ApplyListAdapter;
 import com.dckj.jiuzhu.bean.Member;
-import com.dckj.jiuzhu.view.customview.RefreshListView;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
@@ -44,8 +38,6 @@ public class UnprocessedOrderTabFragment extends BaseFragment {
     ImageView ivTitlebarRight;*/
 
 
-    @BindView(R.id.myrefreshlistview)
-    RefreshListView mMyListView;
     @BindView(R.id.myrefreshrecyclerview)
     LRecyclerView mRecyclerView;
 
@@ -54,10 +46,6 @@ public class UnprocessedOrderTabFragment extends BaseFragment {
     private ApplyListAdapter mDataAdapter;
 
 
-    private ArrayList<String> listDatas;
-    private MyAdapter myAdapter;
-    private Handler mHandler;
-    private boolean isRefresh = false;
     /**
      * 服务器端一共多少条数据
      */
@@ -76,7 +64,6 @@ public class UnprocessedOrderTabFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -128,102 +115,6 @@ public class UnprocessedOrderTabFragment extends BaseFragment {
         }
     }
 
-
-    private void initListListView() {
-        /*产生测试的数据*/
-        listDatas = new ArrayList<String>();
-        for (int i = 0; i < 30; i++) {
-            listDatas.add("这是一条ListView数据: " + i);
-        }
-        /*数据适配器*/
-        myAdapter = new MyAdapter();
-        mMyListView.setAdapter(myAdapter);
-        mMyListView.setRefreshListener(mRefreshListener);
-
-    }
-
-    private RefreshListView.OnRefreshListener mRefreshListener = new RefreshListView.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    listDatas.add(0, "我是下拉刷新的数据" + Math.random() * 10 + "");
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAdapter.notifyDataSetChanged();
-                            mMyListView.onRefreshComplete();
-                        }
-                    });
-                }
-            }).start();
-        }
-
-        @Override
-        public void onLoadMore() {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    listDatas.add("我是加载更多的数据" + Math.random() * 10 + "");
-                    listDatas.add("我是加载更多的数据" + Math.random() * 10 + "");
-                    listDatas.add("我是加载更多的数据" + Math.random() * 10 + "");
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAdapter.notifyDataSetChanged();
-                            mMyListView.onRefreshComplete();
-                        }
-                    });
-                }
-            }).start();
-        }
-    };
-
-    class MyAdapter extends BaseAdapter {
-        /**
-         * How many items are in the data set represented by this Adapter.
-         *
-         * @return Count of items.
-         */
-        @Override
-        public int getCount() {
-            return listDatas.size();
-        }
-
-
-        @Override
-        public Object getItem(int position) {
-            return listDatas.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TextView textView = new TextView(parent.getContext());
-            textView.setTextSize(18f);
-            textView.setTextColor(Color.BLUE);
-            textView.setText(listDatas.get(position));
-            return textView;
-        }
-    }
-
-
     private void initRecyclerView() {
         ArrayList<Member> dataList;
         dataList = loadData(15);
@@ -253,7 +144,6 @@ public class UnprocessedOrderTabFragment extends BaseFragment {
                 mDataAdapter.clear();
                 mRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
                 mCurrentCounter = 0;
-                isRefresh = true;
                 mDataAdapter.setDataList(loadData(30));
                 //requestData();
                 mRecyclerView.refreshComplete(REQUEST_COUNT);

@@ -1,23 +1,30 @@
 package com.dckj.jiuzhu.view.fragment;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dckj.jiuzhu.MainActivity;
 import com.dckj.jiuzhu.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 首页
  */
 
-public class SettingsTabFragment extends BaseFragment {
+public class SettingsTabFragment extends PreferenceFragmentCompat {
 
     @BindView(R.id.tv_titlebar_center)
     TextView tvTitlebarCenter;
@@ -26,39 +33,41 @@ public class SettingsTabFragment extends BaseFragment {
     /*@BindView(R.id.iv_titlebar_right)
     ImageView ivTitlebarRight;*/
 
+    protected Unbinder mUnbinder;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        addPreferencesFromResource(R.xml.preference_setting);
     }
 
     @Override
-    protected void initData() {
+    public void onCreatePreferences(Bundle bundle, String s) {
 
     }
 
     @Override
-    protected void initView() {
-        ((TextView) mView.findViewById(R.id.tv_titlebar_center)).setText(R.string.settings);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+        //return inflater.inflate(R.layout.fragment_tab_settings, null);
     }
 
     @Override
-    protected void initLayoutRes() {
-        mLayoutRes = R.layout.fragment_tab_home;
-        mLayoutResV19 = R.layout.fragment_tab_home_v19;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mUnbinder = ButterKnife.bind(this, view);
+        ((TextView) view.findViewById(R.id.tv_titlebar_center)).setText(R.string.settings);
+        Toolbar toolbar = view.findViewById(R.id.title_bar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
     }
 
     @Override
-    protected void initMenuRes() {
-        mMenuRes = R.menu.menu_home_page;
-    }
-
-
-    @Override
-    protected void clickMenuItem(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.tv_test_menu:
-            Toast.makeText(mContext,"click menu item",Toast.LENGTH_SHORT).show();
-            break;
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(mUnbinder != null){
+            mUnbinder.unbind();
         }
     }
 

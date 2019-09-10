@@ -7,6 +7,7 @@ import com.dckj.jiuzhu.view.fragment.ProcessedOrderTabFragment;
 import com.dckj.jiuzhu.view.fragment.BacklogTabFragment;
 import com.dckj.jiuzhu.view.fragment.StatisticsTabFragment;
 import com.dckj.jiuzhu.view.fragment.SettingsTabFragment;
+import com.dckj.jiuzhu.view.fragment.ApplyFragment;
 import com.dckj.jiuzhu.R;
 
 public enum MainTabs {
@@ -21,7 +22,9 @@ public enum MainTabs {
     //统计
     Statistics(4, R.string.menu_statistics_page, R.drawable.selector_tab_home, StatisticsTabFragment.class),
     //设置
-    Settings(5, R.string.settings, R.drawable.selector_tab_home, SettingsTabFragment.class);
+    Settings(5, R.string.settings, R.drawable.selector_tab_home, SettingsTabFragment.class),
+    //申请
+    Apply(6, R.string.apply, R.drawable.selector_tab_home, ApplyFragment.class);
 
     private int i;
     private int name;

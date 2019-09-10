@@ -3,33 +3,49 @@ package com.dckj.jiuzhu.view.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dckj.jiuzhu.R;
+import com.dckj.jiuzhu.adapter.GridAdapter;
 import com.dckj.jiuzhu.adapter.NoScrollGridAdapter;
+import com.dckj.jiuzhu.bean.Bimp;
 import com.dckj.jiuzhu.bean.Member;
 import com.dckj.jiuzhu.module.Constants;
-import com.dckj.jiuzhu.module.Utils;
 import com.dckj.jiuzhu.module.config.ImageLoaderConfig;
 import com.dckj.jiuzhu.module.util.DensityUtil;
+import com.dckj.jiuzhu.module.util.FileUtils;
+import com.dckj.jiuzhu.module.util.WaterUtils;
 import com.dckj.jiuzhu.view.customview.NoScrollGridView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SurveyActivity extends BaseActivity {
 
@@ -38,6 +54,7 @@ public class SurveyActivity extends BaseActivity {
     private Button mAssignedButton;
     private int mMembersCount = 0;
     private String mAssginedname;
+    private GridAdapter mAdapter;
 
     @Override
     protected int getLayoutRes() {
@@ -61,6 +78,8 @@ public class SurveyActivity extends BaseActivity {
                 dialogChoice();
             }
         });
+
+        loadIntentExtra();
         if (!ImageLoader.getInstance().isInited()) {
             ImageLoaderConfig.initImageLoader(this, Constants.BASE_IMAGE_CACHE);
         }
@@ -110,13 +129,23 @@ public class SurveyActivity extends BaseActivity {
         addMembersInfo(member1);
         addMembersInfo(member2);
         mMembersCount = 2;
-        for (int a = 0;a < mMembersCount; a++) {
-           //addView(member1);
+        for (int a = 0; a < mMembersCount; a++) {
+            //addView(member1);
         }
 
-        addSurveryItems();
+        if (mIsUpload) {
+        addSurveyedItems();
+        } else {
+        addSurveyItems();
+        }
+
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mAdapter.update();
+    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -141,6 +170,18 @@ public class SurveyActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private String mUserId;
+    private String mUserIDCard;
+    private boolean mIsUpload;
+    private void loadIntentExtra() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mUserId = intent.getStringExtra("user_UUID");
+            mUserIDCard = intent.getStringExtra("user_idcard");
+            mIsUpload = intent.getBooleanExtra("isUpload", false);
+        }
     }
 
     private void updateApplicantInfo(Member member) {
@@ -183,9 +224,45 @@ public class SurveyActivity extends BaseActivity {
         mRelationMembersLayout.addView(layout);
     }
 
-    private void addSurveryItems() {
+    //采集信息，未上传信息，允许编辑
+    private void addSurveyItems() {
         LayoutInflater inflater = LayoutInflater.from(SurveyActivity.this);
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.layout_survery_item, null);
+        EditText contentEditText = layout.findViewById(R.id.survey_content);
+        contentEditText.setText("----调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容-----" +
+                "---调查内容--------调查内容--------调查内容--------调查内容--------调查内容----" +
+                "----调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容----" +
+                "----调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容----" +
+                "----调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容----" +
+                "----调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容--------调查内容----");
+        GridView noScrollgridview = (GridView) layout.findViewById(R.id.noScrollgridview);
+        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        mAdapter = new GridAdapter(this);
+        mAdapter.update();
+        noScrollgridview.setAdapter(mAdapter);
+        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.v("lxw","position = "+position+"  bimp size = "+Bimp.bmp.size());
+                if ((position == 0 && Bimp.bmp.size() == 0) || position == Bimp.bmp.size()) {
+                    photo();
+                    //new PopupWindows(PublishedActivity.this, noScrollgridview);
+                } else {
+                    Intent intent = new Intent(SurveyActivity.this,
+                            PhotoActivity.class);
+                    intent.putExtra("ID", position);
+                    startActivity(intent);
+                }
+            }
+        });
+        mSurveyItemsLayout.addView(layout);
+    }
+
+
+    //显示已上传信息，只许查看，不允许编辑
+    private void addSurveyedItems() {
+        LayoutInflater inflater = LayoutInflater.from(SurveyActivity.this);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.layout_surveryed_item, null);
         ImageView imageView = layout.findViewById(R.id.iv_avatar);
         TextView tv_title = (TextView) layout.findViewById(R.id.tv_title);
         TextView tv_content = (TextView) layout.findViewById(R.id.tv_content);
@@ -195,8 +272,8 @@ public class SurveyActivity extends BaseActivity {
         gridview.setNumColumns(colnum);
 
         //tv_title.setText(Html.fromHtml("<u>"+itemEntity.getTitle()+"</u>"));
-        tv_title.setText("调查信息");
-        tv_content.setText("调查内容");
+        tv_title.setText("调查信息:"+"调查信息-调查信息");
+        tv_content.setText("调查内容："+"调查内容-调查内容");
         tv_Time.setText("2019-09-10 12:10:10");
         // 使用ImageLoader加载网络图片
         DisplayImageOptions options = new DisplayImageOptions.Builder()//
@@ -273,6 +350,71 @@ public class SurveyActivity extends BaseActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+    }
+
+    /** 拍照上传 */
+    private String mPhotoPath;
+    private File mPhotoFile;
+    public final static int CAMERA_RESULT = 1;
+
+    public void photo() {
+        Log.v("lxw","photo");
+        try {
+            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");//开始拍照
+            mPhotoPath = getSDPath()+"/"+ mUserIDCard+"_"+ getPhotoFileName();//设置图片文件路径，getSDPath()和getPhotoFileName()具体实现在下面
+
+            mPhotoFile = new File(mPhotoPath);
+            if (!mPhotoFile.exists()) {
+                mPhotoFile.getParentFile().mkdirs();
+                mPhotoFile.createNewFile();//创建新文件
+            }
+
+            Uri tempUri;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tempUri = FileProvider.getUriForFile(mContext,"com.dckj.jiuzhu", mPhotoFile);
+            } else {
+                tempUri = Uri.fromFile(mPhotoFile);
+            }
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);//Intent有了图片的信息
+            startActivityForResult(intent, CAMERA_RESULT);//跳转界面传回拍照所得数据
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //startActivityForResult 的返回结果
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_RESULT) {
+            Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath, null);
+            if(bitmap != null && !bitmap.isRecycled()){//判断位图不为空
+                mPhotoPath= WaterUtils.addText(bitmap,"我是水印",mPhotoPath);
+                Bimp.drr.add(mPhotoPath);
+            }
+            bitmap.recycle();
+            mAdapter.notifyDataSetChanged();
+            //mImageView.setImageBitmap(bitmap);
+        }
+    }
+
+    //获取sd卡路径
+    public String getSDPath(){
+        File sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState()
+                .equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
+        if   (sdCardExist)
+        {
+            sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        }
+        return sdDir.toString()+ "/jiuzhu";
+    }
+
+    //获取照片文件名字
+    private String getPhotoFileName() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "_yyyyMMdd_HHmmss");
+        return dateFormat.format(date)  +".jpg";
     }
 
 }

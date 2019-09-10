@@ -17,6 +17,7 @@
     <string name="menu_statistics_page">@string/tile_statistics_page</string>
 
     <string name="settings">设置</string>
+    <string name="apply">申请救助</string>
     <string name="title_activity_login">登录</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

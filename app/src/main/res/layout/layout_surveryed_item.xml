@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--显示已上传信息，只许查看，不允许编辑-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/tv_Time"
+        android:text="今天心情好！"
+        android:autoLink="all"
+        android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="3d ago"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black"
+            android:textSize="11dp"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/re_title_dt"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:text="今天又是雾霾！"
+        android:textSize="16sp" />
+
+    <com.dckj.jiuzhu.view.customview.NoScrollGridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:gravity="center"
+        android:horizontalSpacing="2.5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2.5dp" />
+    <!--android:columnWidth="70dp"
+    android:stretchMode="columnWidth"-->
+
+</LinearLayout>

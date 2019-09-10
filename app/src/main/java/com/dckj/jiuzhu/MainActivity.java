@@ -155,6 +155,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         LinearLayout menu_settings = (LinearLayout)  view.findViewById(R.id.slide_menu_settings);
         LinearLayout menu_refresh = (LinearLayout) view.findViewById(R.id.slide_menu_refresh);
         LinearLayout menu_logout = (LinearLayout) view.findViewById(R.id.slide_menu_logout);
+        LinearLayout menu_apply = (LinearLayout) view.findViewById(R.id.slide_menu_apply);
         mMenuNavigationBarView = view.findViewById(R.id.menunavigationbarview);
 
         menu_home.setOnClickListener(this);
@@ -165,6 +166,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         menu_settings.setOnClickListener(this);
         menu_refresh.setOnClickListener(this);
         menu_logout.setOnClickListener(this);
+        menu_apply.setOnClickListener(this);
     }
 
     private void updateMainLayout() {
@@ -218,6 +220,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.slide_menu_logout://切换用户/注销
                 ToastUtil.makeText(mContext,"点击了切换用户/注销");
                 slidingMenu.toggle();
+                break;
+            case R.id.slide_menu_apply://申请
+                slidingMenu.toggle();
+                tabHost.setCurrentTab(6);
                 break;
             default:
                 break;

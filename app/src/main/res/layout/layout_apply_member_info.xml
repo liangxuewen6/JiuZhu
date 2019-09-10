@@ -27,12 +27,12 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="姓名："/>
-        <TextView
+        <EditText
             android:id="@+id/relation_member_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="姓名"/>
+            android:hint="姓名"/>
 
     </LinearLayout>
     <View
@@ -45,16 +45,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="性别 ："/>
-        <TextView
+        <EditText
             android:id="@+id/relation_member_sex"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="性别"/>
+            android:hint="性别"/>
     </LinearLayout>
 
     <View
@@ -70,12 +69,12 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="关系 ："/>
-        <TextView
+        <EditText
             android:id="@+id/relation_member_relation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="关系"/>
+            android:hint="关系"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -90,12 +89,12 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="身份证:"/>
-        <TextView
+        <EditText
             android:id="@+id/relation_member_idcard"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="身份證"/>
+            android:hint="身份证"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -112,12 +111,12 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="电话 ："/>
-        <TextView
+        <EditText
             android:id="@+id/relation_member_tel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="电话"/>
+            android:hint="电话"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -133,12 +132,12 @@
             android:layout_height="wrap_content"
             android:text="住址 ："/>
 
-        <TextView
+        <EditText
             android:id="@+id/relation_member_address"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="住址"/>
+            android:hint="住址"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

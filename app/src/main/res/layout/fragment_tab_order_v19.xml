@@ -7,13 +7,6 @@
 
     <include layout="@layout/titlebar_layout"/>
 
-
-    <com.dckj.jiuzhu.view.customview.RefreshListView
-        android:id="@+id/myrefreshlistview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
     <com.github.jdsjlzx.recyclerview.LRecyclerView
         android:id="@+id/myrefreshrecyclerview"
         android:layout_width="fill_parent"
